@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layouts::header"></head>
+
+
+<body>
+
+<nav th:replace="layouts::navbar"></nav>
+<br></br>
+
+<div class="container">
+
+
+    <form class="row" th:action="@{/employees/save}" th:object="${employee}" method="POST">
+        <div class ="col-md-6">
+        <input type="hidden" th:field="${employee.employeeId}"/>
+        <input type="hidden" th:field="*{projects}"/>
+            <p class="font-weight-bold">Add New Employee</p>
+            <hr>
+            <input type="text" placeholder="Employee First Name" th:field="${employee.firstName}">
+            <br></br>
+            <input type="text" placeholder="Employee Last Name" th:field="${employee.lastName}">
+            <br> </br>
+            <p class="font-weight-bold">Add Certificate/Certificates & Management Level to an Employee</p>
+            <hr>
+            <select class="custom-select my-1 mr-lg" id="inlineFormCustomSelectPref" th:field="${employee.managementLevel}">
+                <option th:value="CL7">CL 7</option>
+                <option th:value="CL8">CL 8</option>
+                <option th:value="CL9">CL 9</option>
+                <option th:value="CL10">CL 10</option>
+                <option th:value="CL11">CL 11</option>
+                <option th:value="CL12">CL 12</option>
+            </select>
+            <br> </br>
+            <p class="font-italic text-danger">**Hold down Ctrl when adding additional Certifications to an Employee**</p>
+
+            <select style="height: 350px;" class="custom-select my-1 mr-lg" id="inlineFormCustomSelectPref" th:field="*{certifications}" multiple="multiple">
+                <option th:each = "epicCert : ${allCertifications}" th:value="${epicCert.epic_cert_id}" th:text="${epicCert.certName}"></option>
+            </select>
+            <br></br>
+     		<p class="font-weight-bold">Add Availability Date</p>
+			<hr>
+			<input type="date" placeholder="Availability Date" th:field="${employee.availability}">
+            <br> </br>
+            <button type="submit" class="btn btn-info btn-sm mb-3">Update Employee</button>
+        </div>
+    </form>
+
+</div>
+
+</body>
+
+
+
+</html>

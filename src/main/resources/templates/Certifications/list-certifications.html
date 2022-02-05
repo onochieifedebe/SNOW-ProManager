@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	
+<head th:replace="layouts :: header"></head>
+
+<body>
+<nav th:replace="layouts :: navbar"></nav>
+	<br>
+
+		<div class="container">
+			<h3>Certification Directory</h3>
+			<hr>
+			
+			<!--New Employee Button -->
+			<a th:href="@{/certifications/new}" class="btn btn-primary btn-sm mb-3">Add New Certification</a>
+			<br></br>
+			
+			<table class="table_id display table table-bordered table-striped table-hover">
+				<thead class="thead-dark">
+					<tr>
+						<th>Certification ID</th>
+						<th>Certification Name</th>
+						<th>Description</th>
+					</tr>
+				</thead>		
+				<tbody>
+					<tr th:each="aCertification : ${certifications}">
+						<td th:text="${aCertification.epic_cert_id}"/>
+						<td th:text="${aCertification.certName}"/>
+						<td th:text="${aCertification.certDescription}"/>
+					</tr>
+				</tbody>
+			
+			</table>
+		</div>
+		
+		<br></br>
+		<div class="container">
+		
+			<div>
+				<h4>Total Resources <h6><a class="fw-lighter fs-6" th:href="@{/employees}">[Certified Resources]</a></h6></h4>
+				<hr>
+				<table class="table_id display table table-bordered table-striped table-hover">
+					<thead class="thead-dark">
+						<tr>						
+							<th>Certification</th>
+							<th>Resource Capacity</th>
+						</tr>		
+					</thead>
+					<tbody>
+						<tr th:each="aCertification : ${certificationEmployeeList}">
+							<td th:text="${aCertification.Certification}"/>
+							<td th:text="${aCertification.ResourceCapacity}"/>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<script>
+			$(document).ready( function () {
+		    	$('.table_id').DataTable();
+			} );
+		</script>	
+		
+</body>
+	
+</html>

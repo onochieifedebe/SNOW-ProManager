@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	
+	<head th:replace="layouts :: header"></head>
+	
+	<body>
+	
+	<nav th:replace="layouts :: navbar"></nav>
+	<br>
+		<div class="container">
+			<h3>Employee Directory</h3>
+			<hr>
+			
+			<!--New Employee Button -->
+			<a th:href="@{/employees/new}" class="btn btn-primary btn-sm mb-3">Add New Employee</a>
+			&nbsp;|&nbsp;
+			<a th:href="@{/employees/exportemployees}" class="btn btn-secondary btn-sm mb-3">Export to PDF</a>
+			&nbsp;|&nbsp;
+			<a th:href="@{/employees/exportcsvemployees}" class="btn btn-success btn-sm mb-3">Export to CSV</a>
+			<br></br>
+			<table id="myTableY" class="table_id display table table-bordered table-striped table-hover">
+				<thead class="thead-dark">
+					<tr>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Management Level</th>
+						<th>Action</th>
+					</tr>
+				</thead>		
+				<tbody>
+					<tr th:each="aEmployee : ${employees}">
+						<td th:text="${aEmployee.firstName}"/>
+						<td th:text="${aEmployee.lastName}"/>
+						<td th:text="${aEmployee.managementLevel}"/>
+						<td>
+							<a th:href="@{/employees/update(id=${aEmployee.employeeId})}" class="btn btn-primary btn-sm">Update</a>
+							<a th:href="@{/employees/delete(id=${aEmployee.employeeId})}" class="btn btn-danger btn-sm" onClick="if (!(confirm('Are you sure you want to delete this employee?'))) return false">Delete</a>
+						</td>
+					</tr>
+				</tbody>
+			
+			</table>
+		</div>
+		<br></br>
+		<div class="container">
+		
+			<div>
+				<h4>Certified Resources</h4>
+				<hr>
+				<a th:href="@{/employees/certifiedresources}" class="btn btn-secondary btn-sm mb-3">Export to PDF</a>
+				&nbsp;|&nbsp;
+				<a th:href="@{/employees/csvcertifiedresources}" class="btn btn-success btn-sm mb-3">Export to CSV</a>
+				<br></br>
+				<table id="myTable" class="table_id display table table-bordered table-striped table-hover">
+					<thead class="thead-dark">
+						<tr>
+							<th>Certification</th>						
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Management Level</th>
+							<th>Availability Date</th>							
+						</tr>		
+					</thead>
+					<tbody>
+						<tr th:each="aResourceCertification : ${resourceCertificationList}">
+							<td th:text="${aResourceCertification.CertName}"/>
+							<td th:text="${aResourceCertification.FirstName}"/>
+							<td th:text="${aResourceCertification.LastName}"/>
+							<td th:text="${aResourceCertification.ClLevel}"/>	
+							<td th:text="${aResourceCertification.availability}"/>						
+						</tr>
+					</tbody>
+				</table>				
+				
+			</div>			
+		</div>
+		<script>
+			$(document).ready( function () {
+		    	$('.table_id').DataTable();
+			} );
+		</script>
+	</body>
+	
+</html>

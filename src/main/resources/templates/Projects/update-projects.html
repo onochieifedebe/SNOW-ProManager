@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layouts::header"></head>
+
+
+<body>
+
+<nav th:replace="layouts::navbar"></nav>
+<br></br>
+<div class="container">
+
+    <form class="row" th:action="@{/projects/save}" th:object="${project}" method="POST">
+        <div class="col-md-6">
+        <input type="hidden" th:field="${project.projectId}"/>
+            <p class="font-weight-bold">Add New Project</p>
+            <hr>
+            <p class="font-weight-bold">Project/Client Name</p>	
+            <input type="text" placeholder="Project/Client Name" th:field="${project.name}">
+            <br></br>
+            <p class="font-weight-bold">Client Industry</p>
+             <select th:field="${project.company_industry}">
+             	<option value="" />
+                <option th:value="HealthcareProvider"> Healthcare Provider</option>
+                <option th:value="HealthcareInsurer"> Healthcare Insurer</option>
+                <option th:value="Other"> Other</option>
+            </select>
+            <br></br>
+            <p class="font-weight-bold">Client Company Size</p>
+             <select th:field="${project.company_size}">
+             	<option value="" />
+                <option th:value="Small">Small Company Size</option>
+                <option th:value="Medium">Medium Company Size</option>
+                <option th:value="Large">Large Company Size</option>
+            </select>
+        	<br></br>
+            <p class="font-italic text-danger">**Start & End Dates are required fields and will cause an error if not inputed**</p>
+            <input type="date" placeholder="Start Date" name="project-startDate" th:field="${project.startDate}">
+            <input type="date" placeholder="End Date" name="project-enddate" th:field="${project.endDate}">
+            <br></br>
+            <select th:field="${project.status}">
+                <option th:value="NOTSTARTED"> Not Started</option>
+                <option th:value="INPROGRESS"> In Progress</option>
+                <option th:value="COMPLETED"> Completed</option>
+            </select>
+            <br></br>
+            <p class="font-weight-bold">Number of Resources Needed</p>
+	        <input type="number" placeholder="Number of Resources Needed" th:field="${project.resourcesNeeded}">
+            <br></br>
+            <p class="font-weight-bold">Number of Resources Assigned</p>
+            <input type="number" placeholder="Number of Resources Assigned" th:field="${project.resourcesAssigned}">
+            <br></br>
+            <textarea style="height: 150px; width: 350px;" type="text" placeholder="Enter Project Description" th:field="${project.description}"></textarea>
+            <br></br>
+            <button type="submit" class="btn btn-info btn-sm mb-3">Update Project</button>
+        </div>
+
+
+
+
+        <div class="col-md-6">
+            <p class="font-weight-bold">Choose Employee(s) to add to Project (Optional)</p>
+            <hr>
+            <select style="height: 350px;" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" th:field="*{employees}" multiple="multiple">
+                <option th:each = "employee : ${allEmployees}" th:value="${employee.employeeId}" th:text="${employee.lastName} + ','+${employee.firstName}"></option>
+            </select>
+        </div>
+    </form>
+
+</div>
+
+</body>
+
+
+
+</html>

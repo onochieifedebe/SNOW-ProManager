@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layouts::header"></head>
+
+
+<body>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+
+		var chartData = "[[${projectTimeList}]]"
+		var chartDataDecoded = decodeHtml(chartData);
+		var chartJsonArray = JSON.parse(chartDataDecoded);
+		var resultArray = [];
+
+
+		for(var i in chartJsonArray){
+			resultArray.push([i, chartJsonArray[i]]);
+		}
+
+		google.charts.load('current', {'packages':['timeline']});
+	    	google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var container = document.getElementById('chart_div');
+        var chart = new google.visualization.Timeline(container);
+        var dataTable = new google.visualization.DataTable();
+
+        dataTable.addColumn({ type: 'string', id: 'Project' });
+        dataTable.addColumn({ type: 'date', id: 'Start' });
+        dataTable.addColumn({ type: 'date', id: 'End' });
+
+	    for (var i = 0; i < resultArray.length; i++) {
+	    	dataTable.addRows([
+	    		  		[resultArray[i][1]["projectName"],
+	    		  		new Date(resultArray[i][1]["startDate"]),
+	    		  		new Date(resultArray[i][1]["endDate"])]
+	    	]);
+	    }
+
+
+        chart.draw(dataTable);
+      }
+
+
+
+	  function decodeHtml(html) {
+		 var txt = document.createElement("textarea");
+		 txt.innerHTML = html;
+		 return txt.value;
+	  }
+</script>
+	<nav th:replace="layouts::navbar"></nav>
+	<br>
+	<div class="container">
+		<h3>Project Dashboard</h3>
+		<hr>
+	</div>
+	<div id="chart_div" style="height: 250px;"></div>
+	<div class="container">
+	<br>
+		<div class="row">
+			<div class="col-md-8">
+			
+				<div >
+					<h4>Current Projects</h4>
+					<hr>
+					<a th:href="@{/projects/new}" class="btn btn-primary btn-sm mb-3">Create a New Project</a>
+					<table class="table_id display table table-bordered table-striped table-hover">
+						<thead class="thead-dark">
+							<tr>
+								<th>Project Id</th>
+								<th>Project Name</th>
+								<th>Start Date</th>
+								<th>End Date</th>
+								<th>Project Status</th>
+							</tr>		
+						</thead>
+						<tbody>
+							<tr th:each="aProject : ${projects}">
+								<td th:text="${aProject.projectId}"/>
+								<td th:text="${aProject.name}"/>
+								<td th:text="${aProject.startDate}"/>
+								<td th:text="${aProject.endDate}"/>
+								<td th:text="${aProject.status}"/>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				
+			</div>
+			
+				<div class="col-md-4">
+				<br></br>
+					<canvas id="projectProgressChart" height="50" width="50"></canvas>
+					
+					<script>
+						var chartData = "[[${statusCount}]]"
+					</script>
+				</div>
+			
+	</div>
+	<br></br>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8">
+				<div>
+					<h4>Employees on Projects</h4>
+					<hr>
+					<a th:href="@{/employees/new}" class="btn btn-primary btn-sm mb-3">Add a New Employee</a>
+					<table class="table_id display table table-bordered table-striped table-hover">
+						<thead class="thead-dark">
+							<tr>						
+								<th>First Name</th>
+								<th>Last Name</th>
+								<th>CL Level</th>
+								<th>Number of Projects</th>
+							</tr>		
+						</thead>
+						<tbody>
+							<tr th:each="aEmployee : ${employeeList}">
+								<td th:text="${aEmployee.FirstName}"/>
+								<td th:text="${aEmployee.LastName}"/>
+								<td th:text="${aEmployee.ManagementLevel}"/>
+								<td th:text="${aEmployee.NumberOfProjects}"/>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="col-md-4">
+					<br></br>
+					<canvas id="empOnProjectChart" height="50" width="50"></canvas>
+					
+					<script>
+						var projData = "[[${projCount}]]"
+					</script>
+				</div>
+		</div>
+		<script>
+			$(document).ready( function () {
+		    	$('.table_id').DataTable();
+			} );
+		</script>
+	</div>
+		<script type="text/javascript" th:src="@{js/myProjectProgressChart.js}"></script>
+		<script type="text/javascript" th:src="@{js/empOnProjectChart.js}"></script>
+</div>
+</body>
+
+
+
+</html>
