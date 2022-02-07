@@ -25,6 +25,8 @@ public class Employee {
 
   private String lastName;
 
+  private String active;
+
   private String managementLevel;
 
   private Date availability;
@@ -101,5 +103,13 @@ public class Employee {
 
   public void setLastName(String lastName) {
     this.lastName = lastName;
+  }
+
+  public String getActive() {
+    return active;
+  }
+
+  public void setActive(String active) {
+    this.active = active;
   }
 }

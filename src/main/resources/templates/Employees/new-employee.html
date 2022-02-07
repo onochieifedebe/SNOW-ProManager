@@ -21,6 +21,13 @@
 		            <br></br>
 		            <input type="text" placeholder="Employee Last Name" th:field="${employee.lastName}">                     
 		            <br> </br>
+					<p class="font-weight-bold">Active</p>
+					<hr>
+					<select class="custom-select my-1 mr-lg" id="inlineFormCustomSelectPref" th:field="${employee.active}">
+						<option th:value="Yes">Yes (Active)</option>
+						<option th:value="No">No (Inactive)</option>
+					</select>
+					<br></br>
 		            <p class="font-weight-bold">Add Certificate/Certificates & Management Level to an Employee</p>
 					<hr>
 		             <select class="custom-select my-1 mr-lg" id="inlineFormCustomSelectPref" th:field="${employee.managementLevel}">
@@ -32,11 +39,10 @@
 		                <option th:value="CL12">CL 12</option>
 		            </select>
 		            <br></br>
-		            <br> </br>
-		            
-							<select style="height: 350px;" class="custom-select my-1 mr-lg" id="inlineFormCustomSelectPref" th:field="*{certifications}" multiple="multiple">
-								<option th:each = "epicCert : ${empCertInOrder}" th:value="${epicCert.certId}" th:text="${epicCert.certName}"></option>
-							</select>
+					<p class="font-italic text-danger">**Hold down Ctrl when adding additional Certifications to an Employee**</p>
+					<select style="height: 350px;" class="custom-select my-1 mr-lg" id="inlineFormCustomSelectPref" th:field="*{certifications}" multiple="multiple">
+						<option th:each = "epicCert : ${empCertInOrder}" th:value="${epicCert.certId}" th:text="${epicCert.certName}"></option>
+					</select>
 					<br> </br>
 					<p class="font-weight-bold">Add Availability Date</p>
 					<hr>

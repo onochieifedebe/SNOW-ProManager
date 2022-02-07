@@ -19,29 +19,29 @@ new Chart(document.getElementById("clEmpCountChart"), {
     labels: labelData,
     datasets: [
 	{	  	
-      label: 'Number of Resources not on Projects',
+      label: 'Resources on Projects',
       fill: false,
       backgroundColor: [
-			'rgb(142,124,195, 0.8)',
-			'rgb(142,124,195, 0.8)',
-			'rgb(142,124,195, 0.8)',
-			'rgb(142,124,195, 0.8)',
-			'rgb(142,124,195, 0.8)',
+            'rgb(54,162,235,0.8)',
+            'rgb(54,162,235, 0.8)',
+            'rgb(54,162,235, 0.8)',
+            'rgb(54,162,235, 0.8)',
+            'rgb(54,162,235, 0.8)',
 		],
 		borderWidth: 2, 
-      data: numberData,
+      data: onProjectData,
     },
     {
-    label: 'Number of Resources on Projects',
+    label: 'Resources NOT on Projects',
       backgroundColor: [
-			'rgb(54,162,235,0.8)',
-			'rgb(54,162,235, 0.8)',
-			'rgb(54,162,235, 0.8)',
-			'rgb(54,162,235, 0.8)',
-			'rgb(54,162,235, 0.8)',
+			'rgb(142,124,195, 0.8)',
+            'rgb(142,124,195, 0.8)',
+            'rgb(142,124,195, 0.8)',
+            'rgb(142,124,195, 0.8)',
+            'rgb(142,124,195, 0.8)',
 					],
 		borderWidth: 2, 
-      data: onProjectData,
+      data: numberData,
     }
 	]
   },

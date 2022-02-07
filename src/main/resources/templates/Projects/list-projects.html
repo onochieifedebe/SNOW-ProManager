@@ -48,9 +48,13 @@
 						<td th:text="${aProject.resourcesAssigned}"/>
 						<td th:text="${aProject.description}"/>
 						<td th:text="${aProject.status}"/>
-						<td>
-							<a th:href="@{/projects/update(id=${aProject.projectId})}" class="btn btn-primary btn-sm">Update</a>
-							<a th:href="@{/projects/delete(id=${aProject.projectId})}" class="btn btn-danger btn-sm" onClick="if (!(confirm('Are you sure you want to delete this project?'))) return false">Delete</a>
+						<td class="dropdown">
+							<button class="btn-sm btn-warning dropdown-toggle" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">More</button>
+							<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenu2">
+								<li><a type="button" th:href="@{/projects/update(id=${aProject.projectId})}" class="text-primary dropdown-item btn">Update</a></li>
+								<li><hr class="dropdown-divider"></li>
+								<li><a type="button" th:href="@{/projects/delete(id=${aProject.projectId})}" class="btn text-danger dropdown-item" onClick="if (!(confirm('Are you sure you want to delete this project?'))) return false">Delete</a></li>
+							</ul>
 						</td>
 					</tr>
 				</tbody>
