@@ -22,7 +22,7 @@ import org.supercsv.prefs.CsvPreference;
 import com.enatcpromanager.com.dto.EmpCertInOrder;
 import com.enatcpromanager.com.dto.ResourceCertification;
 import com.enatcpromanager.com.entities.Employee;
-import com.enatcpromanager.com.entities.EpicCertification;
+import com.enatcpromanager.com.entities.SnowCertification;
 import com.enatcpromanager.com.services.CertificationService;
 import com.enatcpromanager.com.services.EmployeeService;
 import com.enatcpromanager.com.utilities.CertResExporter;
@@ -79,7 +79,7 @@ public class EmployeeController {
     Employee employee = empService.findByEmployeeId(id);
     model.addAttribute("employee", employee);
 
-    List<EpicCertification> certifications = certService.getAll();
+    List<SnowCertification> certifications = certService.getAll();
     model.addAttribute("allCertifications", certifications);
 
     return "Employees/update-employees";

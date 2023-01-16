@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.enatcpromanager.com.dto.EmpInOrder;
 import com.enatcpromanager.com.dto.EmployeeCertification;
-import com.enatcpromanager.com.entities.EpicCertification;
+import com.enatcpromanager.com.entities.SnowCertification;
 import com.enatcpromanager.com.services.CertificationService;
 import com.enatcpromanager.com.services.EmployeeService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -28,7 +28,7 @@ public class CertificationController {
 
   @GetMapping({"/new"})
   public String displayCertificationForm(Model model) {
-    EpicCertification certification = new EpicCertification();
+    SnowCertification certification = new SnowCertification();
     model.addAttribute("epicCert", certification);
 
     List<EmpInOrder> empInOrder = empService.empInOrder();
@@ -41,14 +41,14 @@ public class CertificationController {
   }
 
   @PostMapping({"/save"})
-  public String addCertification(EpicCertification certification, Model model) {
+  public String addCertification(SnowCertification certification, Model model) {
     certService.save(certification);
     return "redirect:/certifications/new";
   }
 
   @GetMapping({""})
   public String displayAllCertifications(Model model) throws JsonProcessingException {
-    List<EpicCertification> certifications = certService.getAll();
+    List<SnowCertification> certifications = certService.getAll();
     model.addAttribute("certifications", certifications);
 
 

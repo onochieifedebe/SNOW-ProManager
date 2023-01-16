@@ -8,19 +8,18 @@ import org.springframework.stereotype.Service;
 
 import com.enatcpromanager.com.dao.ICertificationRepository;
 import com.enatcpromanager.com.dto.EmpCertInOrder;
-import com.enatcpromanager.com.entities.EpicCertification;
+import com.enatcpromanager.com.entities.SnowCertification;
 
 @Service
 public class CertificationService {
-
     @Autowired
     ICertificationRepository certRepo;
 
-    public List<EpicCertification> getAll(){
+    public List<SnowCertification> getAll(){
         return certRepo.findAll();
     }
 
-    public EpicCertification save(EpicCertification certification) {
+    public SnowCertification save(SnowCertification certification) {
         return certRepo.save(certification);
     }
 

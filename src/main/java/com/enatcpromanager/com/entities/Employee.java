@@ -32,8 +32,8 @@ public class Employee {
   private Date availability;
 
   @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
-  @JoinTable(name = "cert_employee", joinColumns = {@JoinColumn(name = "employee_id")}, inverseJoinColumns = {@JoinColumn(name = "epicCert_id")})
-  private List<EpicCertification> certifications;
+  @JoinTable(name = "cert_employee", joinColumns = {@JoinColumn(name = "employee_id")}, inverseJoinColumns = {@JoinColumn(name = "snowCert_id")})
+  private List<SnowCertification> certifications;
 
   @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
   @JoinTable(name = "project_employee", joinColumns = {@JoinColumn(name = "employee_id")}, inverseJoinColumns = {@JoinColumn(name = "project_id")})
@@ -73,11 +73,11 @@ public class Employee {
     this.projects = projects;
   }
 
-  public List<EpicCertification> getCertifications() {
+  public List<SnowCertification> getCertifications() {
     return this.certifications;
   }
 
-  public void setCertifications(List<EpicCertification> certifications) {
+  public void setCertifications(List<SnowCertification> certifications) {
     this.certifications = certifications;
   }
 

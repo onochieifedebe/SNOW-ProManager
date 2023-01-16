@@ -15,23 +15,23 @@ import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 
 @Entity
-public class EpicCertification {
+public class SnowCertification {
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "epic_certification_generator")
-  @SequenceGenerator(name = "epic_certification_generator", sequenceName = "epic_certification_seq", allocationSize = 1)
-  private long epic_cert_id;
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "snow_certification_generator")
+  @SequenceGenerator(name = "snow_certification_generator", sequenceName = "snow_certification_seq", allocationSize = 1)
+  private long snow_cert_id;
   
   private String certName;
   
   private String certDescription;
   
   @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
-  @JoinTable(name = "cert_employee", joinColumns = {@JoinColumn(name = "epicCert_id")}, inverseJoinColumns = {@JoinColumn(name = "employee_id")})
+  @JoinTable(name = "cert_employee", joinColumns = {@JoinColumn(name = "snowCert_id")}, inverseJoinColumns = {@JoinColumn(name = "employee_id")})
   private List<Employee> employees;
   
-  public EpicCertification() {}
+  public SnowCertification() {}
   
-  public EpicCertification(String certName, String certDescription) {
+  public SnowCertification(String certName, String certDescription) {
     this.certName = certName;
     this.certDescription = certDescription;
   }
@@ -45,12 +45,12 @@ public class EpicCertification {
   }  
 
   
-  public long getEpic_cert_id() {
-	return epic_cert_id;
+  public long getSnow_cert_id() {
+	return snow_cert_id;
 }
 
-public void setEpic_cert_id(long epic_cert_id) {
-	this.epic_cert_id = epic_cert_id;
+public void setSnow_cert_id(long snow_cert_id) {
+	this.snow_cert_id = snow_cert_id;
 }
 
 public String getCertName() {

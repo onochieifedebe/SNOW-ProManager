@@ -21,7 +21,7 @@ public interface IEmployeeRepository extends CrudRepository<Employee, Long> {
   @Query(nativeQuery = true, value = "SELECT e.first_name as FirstName , e.last_name as LastName , e.management_level as ManagementLevel,  COUNT(pe.employee_id) AS NumberOfProjects FROM employee e LEFT JOIN project_employee pe ON pe.employee_id = e.employee_id GROUP BY e.management_level, e.first_name, e.last_name ORDER BY NumberOfProjects DESC")
   List<EmployeeProject> employeeProjects();
 
-  @Query(nativeQuery = true, value = "SELECT  ec.cert_name as Certification, count(employee_id) as ResourceCapacity FROM epic_certification ec inner join CERT_EMPLOYEE ce ON ce.epic_cert_id = ec.epic_cert_id group by ec.cert_name, ec.epic_cert_id order by ResourceCapacity desc")
+  @Query(nativeQuery = true, value = "SELECT  ec.cert_name as Certification, count(employee_id) as ResourceCapacity FROM snow_certification ec inner join CERT_EMPLOYEE ce ON ce.snow_cert_id = ec.snow_cert_id group by ec.cert_name, ec.snow_cert_id order by ResourceCapacity desc")
   List<EmployeeCertification> employeeCertifications();
 
 
@@ -33,7 +33,7 @@ public interface IEmployeeRepository extends CrudRepository<Employee, Long> {
 
   @Query(nativeQuery = true, value = "SELECT e.first_name as FirstName, e.last_name as LastName, e.management_level as ClLevel, ec.cert_name as CertName, e.availability " +
           "FROM employee e right join cert_employee ce on ce.employee_id = e.employee_id " +
-          "Inner Join epic_certification ec on ce.epic_cert_id = ec.epic_cert_id " +
+          "Inner Join snow_certification ec on ce.snow_cert_id = ec.snow_cert_id " +
           "ORDER BY e.availability")
   List<ResourceCertification> resourceCertifications();
 
